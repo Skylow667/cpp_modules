@@ -1,0 +1,42 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: nlocusso <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/09/26 17:13:34 by nlocusso          #+#    #+#              #
+#    Updated: 2023/03/13 11:54:34 by nlocusso         ###   ########.fr        #
+#    Updated: 2023/01/10 15:15:05 by nlocusso         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+SRCS		= main.cpp Animal.cpp Dog.cpp Cat.cpp WrongCat.cpp WrongAnimal.cpp Brain.cpp
+
+OBJS		= ${SRCS:.cpp=.o}
+
+NAME		= ./Brain
+
+COMPILER	= c++
+
+RM			= rm -f
+
+CFLAGS		= -Wall -Wextra -Werror -std=c++98 
+
+all :        ${NAME}
+
+.cpp.o : $(OBJS)
+		$(COMPILER) $(CFLAGS) -c $< -o $(<:.cpp=.o)
+
+${NAME}:	${OBJS}
+			${COMPILER} ${CFLAGS} -o ${NAME} ${OBJS}
+
+clean :	
+			${RM} ${OBJS} 
+
+fclean : clean
+			${RM} ${NAME} 
+
+re :		fclean all
+
+.PHONY : all clean fclean re
